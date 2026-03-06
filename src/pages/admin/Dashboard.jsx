@@ -6,9 +6,10 @@ import { AUTH_ROUTE } from '../../constant/RoutesConstant';
 function Dashboard(props) {
     const navigate = useNavigate();
     return (
-        <div className='py-5 text-center'>
-            <h1 className='text-white'>Dashboard</h1>
-            <button type='button' className='btn btn-primary' onClick={() => { authLogout(); navigate(AUTH_ROUTE.LOGIN) }}>Logout</button>
+        <div className='py-5 text-center text-dark'>
+            <div className='bg-white p-4 rounded shadow'>
+                <h1 className='text-primary'>Dashboard</h1>
+            </div>
         </div>
     );
 }

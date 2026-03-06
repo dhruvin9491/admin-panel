@@ -4,15 +4,13 @@ import { ROLES } from '../constant/CommonConstant';
 import { ADMIN_ROUTE, USER_ROUTE } from '../constant/RoutesConstant';
 import { checkLogin, getLoggedInUserRole } from '../helper/AuthHelper';
 
-function PublicRoute(props) {
+function PublicRoute() {
     const isLoggedIn = checkLogin();
-    // const user = getLoggedInUser();
     const userRole = getLoggedInUserRole();
 
-    if(isLoggedIn) return <Navigate to={userRole === ROLES.ADMIN ? ADMIN_ROUTE.DASHBOARD : USER_ROUTE.HOME} replace />
+    // if (isLoggedIn) return <Navigate to={userRole === ROLES.ADMIN ? ADMIN_ROUTE.DASHBOARD : USER_ROUTE.HOME} replace />;
 
-    return <Outlet />
-   
-}   
+    return <Outlet />;
+}
 
 export default PublicRoute;

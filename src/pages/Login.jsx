@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { ROLES } from '../constant/CommonConstant';
+import { DEFAULT_ADMIN, ROLES } from '../constant/CommonConstant';
 import { ADMIN_ROUTE, AUTH_ROUTE, USER_ROUTE } from '../constant/RoutesConstant';
+import { STORAGE_KEYS } from '../constant/StorageConstant';
+import * as Yup from 'yup';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { getInputClass } from '../helper/UiHelper';
 
 function Login() {
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -20,38 +25,39 @@ function Login() {
         }),
         onSubmit: (values) => {
 
-            const users = JSON.parse(localStorage.getItem("_users")) || [];
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || " []");
 
-            const user = users.find(
-                u => u.email === values.email && u.password === values.password
-            );
-
-            if (!user) {
+            const userIndex = users.findIndex(u => u.email === values.email && u.password === values.password);
+            if (userIndex === -1) {
                 toast.error("Invalid email or password ❌");
                 return;
             }
 
-            localStorage.setItem("_login_flag", JSON.stringify(true));
-            localStorage.setItem("_login_user", JSON.stringify(user));
+            const checkDeleted = users.findIndex(u => u.email === values.email && u.isDeleted === true);
+            if (checkDeleted !== -1) {
+                toast.warning(`Your account has been Delete. Please contact ${DEFAULT_ADMIN.EMAIL} here to recover your account`);
+                return;
+            }
+
+            users[userIndex].lastLoginTime = new Date().toLocaleString();
+            users[userIndex].updatedAt = new Date().toLocaleString();
+
+            localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+
+            localStorage.setItem(STORAGE_KEYS.LOGIN_FLAG, JSON.stringify(true));
+            localStorage.setItem(STORAGE_KEYS.LOGIN_USER, JSON.stringify(users[userIndex]));
 
             toast.success("Login successful ✅");
 
-            navigate(user?.role === ROLES.ADMIN ? ADMIN_ROUTE.DASHBOARD : USER_ROUTE.HOME);
+            navigate(users[userIndex]?.role === ROLES.ADMIN ? ADMIN_ROUTE.DASHBOARD : USER_ROUTE.HOME);
         }
 
     });
 
-    const getInputClass = (name) => {
-        if (!formik.touched[name]) return "form-control";
-        return formik.errors[name]
-            ? "form-control is-invalid"
-            : "form-control is-valid";
-    };
-
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
-                <div className="col-6">
+                <div className="col-lg-6 col-md-8 col-sm-10 col-12">
                     <div className="card">
                         <div className="card-header">
                             <h2 className="text-center my-3">Login</h2>
@@ -65,7 +71,7 @@ function Login() {
                                     <input
                                         type="email"
                                         name="email"
-                                        className={getInputClass("email")}
+                                        className={getInputClass(formik, "email")}
                                         value={formik.values.email}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -79,20 +85,26 @@ function Login() {
 
                                 <div className="position-relative mb-4">
                                     <label>Password</label>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        autoComplete="new-password"
-                                        className={getInputClass("password")}
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                    />
-                                    {formik.touched.password && formik.errors.password && (
-                                        <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                            {formik.errors.password}
-                                        </span>
-                                    )}
+                                    <div className='input-group'>
+                                        <input
+                                            type={showPassword ? 'text' : 'password'}
+                                            name="password"
+                                            autoComplete="new-password"
+                                            className={getInputClass(formik, "password")}
+                                            value={formik.values.password}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                        />
+                                        {formik.touched.password && formik.errors.password && (
+                                            <span className="invalid-feedback position-absolute top-100 start-0 m-0">
+                                                {formik.errors.password}
+                                            </span>
+                                        )}
+                                        <button type='button' className='btn btn-outline-secondary' onClick={() => setShowPassword(s => !s)} aria-label='Toggle password visibility'>
+                                            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                        </button>
+                                    </div>
+
                                 </div>
 
                                 <button className="btn btn-primary w-100">

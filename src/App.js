@@ -13,6 +13,11 @@ import Home from './pages/user/Home';
 import { ROLES } from './constant/CommonConstant';
 import Dashboard from './pages/admin/Dashboard';
 import { createAdmin } from './helper/AuthHelper';
+import UserLayout from './layouts/UserLayout';
+import About from './pages/user/About';
+import AdminLayout from './layouts/AdminLayout';
+import Userslist from './pages/admin/user/Userslist';
+import ProductList from './pages/admin/product/ProductList';
 
 function App(props) {
   useEffect(() => {
@@ -20,7 +25,7 @@ function App(props) {
   }, []);
   return (
     <>
-      <ToastContainer />
+      <ToastContainer position="bottom-left" />
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path={AUTH_ROUTE.LOGIN} element={<Login />} />
@@ -28,11 +33,18 @@ function App(props) {
         </Route>
 
         <Route element={<PrivateRoute role={ROLES.USER} />}>
-           <Route path={USER_ROUTE.HOME} element={<Home />} />
+          <Route element={<UserLayout />}>
+            <Route path={USER_ROUTE.HOME} element={<Home />} />
+            <Route path={USER_ROUTE.ABOUT} element={<About />} />
+          </Route>
         </Route>
 
         <Route element={<PrivateRoute role={ROLES.ADMIN} />}>
-           <Route path={ADMIN_ROUTE.DASHBOARD} element={<Dashboard />} />
+          <Route element={<AdminLayout />}>
+            <Route path={ADMIN_ROUTE.DASHBOARD} element={<Dashboard />} />
+            <Route path={ADMIN_ROUTE.USER_LIST} element={<Userslist />} />
+            <Route path={ADMIN_ROUTE.PRODUCT_LIST} element={<ProductList />} />
+          </Route>
         </Route>
 
         <Route path={AUTH_ROUTE.ERROR} element={<Error />} />
