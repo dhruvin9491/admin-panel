@@ -18,6 +18,8 @@ import About from './pages/user/About';
 import AdminLayout from './layouts/AdminLayout';
 import Userslist from './pages/admin/user/Userslist';
 import ProductList from './pages/admin/product/ProductList';
+import ProductAdd from './pages/admin/product/ProductAdd';
+import Products from './pages/user/Products';
 
 function App(props) {
   useEffect(() => {
@@ -36,6 +38,7 @@ function App(props) {
           <Route element={<UserLayout />}>
             <Route path={USER_ROUTE.HOME} element={<Home />} />
             <Route path={USER_ROUTE.ABOUT} element={<About />} />
+            <Route path={USER_ROUTE.PRODUCTS} element={<Products />} />
           </Route>
         </Route>
 
@@ -43,6 +46,7 @@ function App(props) {
           <Route element={<AdminLayout />}>
             <Route path={ADMIN_ROUTE.DASHBOARD} element={<Dashboard />} />
             <Route path={ADMIN_ROUTE.USER_LIST} element={<Userslist />} />
+            <Route path={ADMIN_ROUTE.PRODUCT_ADD} element={<ProductAdd />} />
             <Route path={ADMIN_ROUTE.PRODUCT_LIST} element={<ProductList />} />
           </Route>
         </Route>

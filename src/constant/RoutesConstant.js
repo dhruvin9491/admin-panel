@@ -7,7 +7,8 @@ export const AUTH_ROUTE = {
 export const USER_ROUTE = {
     HOME: "/",
     ABOUT: "/about",
-    PROFILE: "/profile"
+    PROFILE: "/profile",
+    PRODUCTS: "/products"
 }
 
 export const ADMIN_ROUTE = {

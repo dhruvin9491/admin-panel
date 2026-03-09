@@ -1,0 +1,11 @@
+.row-deleted td:not(td.action) {
+    background-color: rgba(220, 53, 69, 0.25);
+}
+
+.row-visible td:not(td.action) {
+    background-color: rgba(25, 135, 84, 0.25);
+}
+
+.row-updated td:not(.action) {
+    background-color: rgba(13, 110, 253, 0.25);
+}
