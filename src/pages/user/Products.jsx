@@ -22,7 +22,7 @@ function Products() {
                                             src={product.image}
                                             alt={product.name}
                                             className='card-img-top'
-                                            style={{ height: 180, objectFit: 'cover' }}
+                                            style={{ height: 180, objectFit: 'contain' }}
                                         />
                                     )}
 

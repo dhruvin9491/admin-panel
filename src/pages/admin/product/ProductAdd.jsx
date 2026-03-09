@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ADMIN_ROUTE } from "../../../constant/RoutesConstant";
 import { productAdd } from "../../../redux/actions/ProductActions";
 import { generateUniqId } from "../../../helper/DataGeneratHelper";
+import { uploadImage } from "../../../helper/UploadImage";
 
 function ProductAdd() {
     const dispatch = useDispatch();
@@ -26,18 +27,26 @@ function ProductAdd() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(product);
+
+        let imageURL = null;
+
+        if(product.image) {
+            imageURL = await uploadImage(product.image);
+        }
+
 
         let payload = {
             ...product,
             id: generateUniqId(),
+            image: imageURL,
             isDeleted: false,
             isVisible: false,
             createdAt: new Date().toLocaleString(),
             updatedAt: new Date().toLocaleString(),
         }
-
         dispatch(productAdd(payload));
 
         navigate(ADMIN_ROUTE.PRODUCT_LIST);
