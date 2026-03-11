@@ -4,23 +4,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ADMIN_ROUTE, AUTH_ROUTE, USER_ROUTE } from './constant/RoutesConstant';
+import { createAdmin } from './helper/AuthHelper';
+import { ROLES } from './constant/CommonConstant';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import Home from './pages/user/Home';
-import { ROLES } from './constant/CommonConstant';
 import Dashboard from './pages/admin/Dashboard';
-import { createAdmin } from './helper/AuthHelper';
 import UserLayout from './layouts/UserLayout';
 import About from './pages/user/About';
 import AdminLayout from './layouts/AdminLayout';
 import Userslist from './pages/admin/user/Userslist';
 import ProductList from './pages/admin/product/ProductList';
-import ProductAdd from './pages/admin/product/ProductAdd';
 import Products from './pages/user/Products';
-import ProductUpdate from './pages/admin/product/ProductUpdate';
+import ProductForm from './pages/admin/product/ProductForm';
 
 function App(props) {
   useEffect(() => {
@@ -47,9 +46,9 @@ function App(props) {
           <Route element={<AdminLayout />}>
             <Route path={ADMIN_ROUTE.DASHBOARD} element={<Dashboard />} />
             <Route path={ADMIN_ROUTE.USER_LIST} element={<Userslist />} />
-            <Route path={ADMIN_ROUTE.PRODUCT_ADD} element={<ProductAdd />} />
             <Route path={ADMIN_ROUTE.PRODUCT_LIST} element={<ProductList />} />
-            <Route path={`${ADMIN_ROUTE.PRODUCT_UPDATE}/:id`} element={<ProductUpdate />} />
+            <Route path={ADMIN_ROUTE.PRODUCT_ADD} element={<ProductForm />} />
+            <Route path={`${ADMIN_ROUTE.PRODUCT_UPDATE}/:id`} element={<ProductForm />} />
           </Route>
         </Route>
 

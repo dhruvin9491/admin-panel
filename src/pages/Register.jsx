@@ -83,66 +83,49 @@ function Register() {
                                     <div className='col-12'>
                                         <label className="form-label">Name</label>
                                         <div className="position-relative">
-                                            <input
-                                                type="text"
-                                                name="name"
+                                            <input type="text" name="name"
                                                 className={getInputClass(formik, "name")}
                                                 value={formik.values.name}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                             />
                                             {formik.touched.name && formik.errors.name && (
-                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                                    {formik.errors.name}
-                                                </span>
+                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.name}</span>
                                             )}
                                         </div>
                                     </div>
                                     <div className='col-md-6'>
                                         <label className="form-label">Email</label>
                                         <div className="position-relative">
-                                            <input
-                                                type="email"
-                                                name="email"
+                                            <input type="email" name="email"
                                                 className={getInputClass(formik, "email")}
                                                 value={formik.values.email}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                             />
                                             {formik.touched.email && formik.errors.email && (
-                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                                    {formik.errors.email}
-                                                </span>
+                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.email}</span>
                                             )}
                                         </div>
                                     </div>
                                     <div className='col-md-6'>
                                         <label className="form-label">Mobile</label>
                                         <div className="position-relative">
-                                            <input
-                                                type="tel"
-                                                name="mobile"
-                                                maxLength="10"
+                                            <input type="tel" name="mobile" maxLength="10"
                                                 className={getInputClass(formik, "mobile")}
                                                 value={formik.values.mobile}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                             />
                                             {formik.touched.mobile && formik.errors.mobile && (
-                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                                    {formik.errors.mobile}
-                                                </span>
+                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.mobile}</span>
                                             )}
                                         </div>
                                     </div>
                                     <div className='col-12'>
                                         <label className="form-label">Profile Image</label>
                                         <div className="position-relative">
-                                            <input
-                                                type="file"
-                                                name="profileImage"
-                                                accept="image/*"
-                                                className="form-control"
+                                            <input type="file" name="profileImage" accept="image/*" className="form-control"
                                                 onChange={(e) => {
                                                     const file = e.currentTarget.files && e.currentTarget.files[0];
                                                     if (!file) return;
@@ -166,19 +149,15 @@ function Register() {
                                     <div className='col-md-6'>
                                         <label className="form-label">Password</label>
                                         <div className='input-group position-relative'>
-                                            <input
+                                            <input name="password" autoComplete="new-password"
                                                 type={showPassword ? 'text' : 'password'}
-                                                name="password"
-                                                autoComplete="new-password"
                                                 className={getInputClass(formik, "password")}
                                                 value={formik.values.password}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                             />
                                             {formik.touched.password && formik.errors.password && (
-                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                                    {formik.errors.password}
-                                                </span>
+                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.password}</span>
                                             )}
                                             <button type='button' className='btn btn-outline-secondary' onClick={() => setShowPassword(s => !s)} aria-label='Toggle password visibility'>
                                                 {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
@@ -189,30 +168,23 @@ function Register() {
                                     <div className='col-md-6'>
                                         <label className="form-label">Confirm Password</label>
                                         <div className='input-group position-relative'>
-                                            <input
+                                            <input name="confirmPassword" autoComplete="new-password"
                                                 type={showConfirm ? 'text' : 'password'}
-                                                name="confirmPassword"
-                                                autoComplete="new-password"
                                                 className={getInputClass(formik, "confirmPassword")}
                                                 value={formik.values.confirmPassword}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                             />
                                             {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                                    {formik.errors.confirmPassword}
-                                                </span>
+                                                <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.confirmPassword}</span>
                                             )}
                                             <button type='button' className='btn btn-outline-secondary' onClick={() => setShowConfirm(s => !s)} aria-label='Toggle password visibility'>
                                                 {showConfirm ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                             </button>
                                         </div>
-
                                     </div>
                                     <div className='col-12'>
-                                        <button type="submit" className="btn btn-success w-100">
-                                            Create Account
-                                        </button>
+                                        <button type="submit" className="btn btn-success w-100">Create Account</button>
                                     </div>
                                 </div>
                             </form>

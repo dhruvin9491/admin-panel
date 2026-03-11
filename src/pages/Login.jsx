@@ -77,48 +77,35 @@ function Login() {
                                         onBlur={formik.handleBlur}
                                     />
                                     {formik.touched.email && formik.errors.email && (
-                                        <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                            {formik.errors.email}
-                                        </span>
+                                        <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.email}</span>
                                     )}
                                 </div>
 
                                 <div className="position-relative mb-4">
                                     <label>Password</label>
                                     <div className='input-group'>
-                                        <input
+                                        <input name="password" autoComplete="new-password"
                                             type={showPassword ? 'text' : 'password'}
-                                            name="password"
-                                            autoComplete="new-password"
                                             className={getInputClass(formik, "password")}
                                             value={formik.values.password}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                         />
                                         {formik.touched.password && formik.errors.password && (
-                                            <span className="invalid-feedback position-absolute top-100 start-0 m-0">
-                                                {formik.errors.password}
-                                            </span>
+                                            <span className="invalid-feedback position-absolute top-100 start-0 m-0">{formik.errors.password}</span>
                                         )}
                                         <button type='button' className='btn btn-outline-secondary' onClick={() => setShowPassword(s => !s)} aria-label='Toggle password visibility'>
                                             {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                         </button>
                                     </div>
-
                                 </div>
-
-                                <button className="btn btn-primary w-100">
-                                    Sign In
-                                </button>
-
+                                <button className="btn btn-primary w-100">Sign In</button>
                             </form>
                         </div>
-
                         <div className="card-footer text-center">
                             Create new account
                             <Link to={AUTH_ROUTE.REGISTER}> Sign up</Link>
                         </div>
-
                     </div>
                 </div>
             </div>
