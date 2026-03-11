@@ -1,62 +1,69 @@
 import { PRODUCTS_ACTION } from "../../constant/ActionConstant";
 
 const initState = {
-    products: []
+    list: []
 }
 
 export const productReducer = (state = initState, action) => {
-    
+
     switch (action.type) {
+
         case PRODUCTS_ACTION.ADD_PRODUCT:
             return {
                 ...state,
-                products: [...state.products, action.data]
+                list: [...state.list, action.data]
             };
+
         case PRODUCTS_ACTION.UPDATE_PRODUCT:
             return {
                 ...state,
-                products: state.products.map((product) =>
+                list: state.list.map((product) =>
                     product.id === action.id
                         ? { ...product, ...action.data, updatedAt: new Date().toLocaleString() }
                         : product
                 )
-            }
+            };
+
         case PRODUCTS_ACTION.DELETE_PRODUCT:
             return {
                 ...state,
-                products: state.products.map((product) =>
+                list: state.list.map((product) =>
                     product.id === action.id
                         ? { ...product, isDeleted: true, isVisible: false, updatedAt: new Date().toLocaleString() }
                         : product
                 )
             };
+
         case PRODUCTS_ACTION.RECOVER_PRODUCT:
             return {
                 ...state,
-                products: state.products.map((product) =>
+                list: state.list.map((product) =>
                     product.id === action.id
                         ? { ...product, isDeleted: false, updatedAt: new Date().toLocaleString() }
                         : product
                 )
             };
+
         case PRODUCTS_ACTION.SHOW_PRODUCT:
             return {
                 ...state,
-                products: state.products.map((product) =>
+                list: state.list.map((product) =>
                     product.id === action.id
                         ? { ...product, isVisible: true, updatedAt: new Date().toLocaleString() }
                         : product
                 )
             };
+
         case PRODUCTS_ACTION.HIDE_PRODUCT:
             return {
                 ...state,
-                products: state.products.map((product) =>
+                list: state.list.map((product) =>
                     product.id === action.id
                         ? { ...product, isVisible: false, updatedAt: new Date().toLocaleString() }
                         : product
                 )
             };
+
         default:
             return state;
     }

@@ -20,6 +20,7 @@ import Userslist from './pages/admin/user/Userslist';
 import ProductList from './pages/admin/product/ProductList';
 import ProductAdd from './pages/admin/product/ProductAdd';
 import Products from './pages/user/Products';
+import ProductUpdate from './pages/admin/product/ProductUpdate';
 
 function App(props) {
   useEffect(() => {
@@ -48,6 +49,7 @@ function App(props) {
             <Route path={ADMIN_ROUTE.USER_LIST} element={<Userslist />} />
             <Route path={ADMIN_ROUTE.PRODUCT_ADD} element={<ProductAdd />} />
             <Route path={ADMIN_ROUTE.PRODUCT_LIST} element={<ProductList />} />
+            <Route path={`${ADMIN_ROUTE.PRODUCT_UPDATE}/:id`} element={<ProductUpdate />} />
           </Route>
         </Route>
 

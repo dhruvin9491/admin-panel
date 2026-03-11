@@ -6,11 +6,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RestoreIcon from '@mui/icons-material/Restore';
 import { productDelete, productHide, productRecover, productShow } from '../../../redux/actions/ProductActions';
+import { useNavigate } from 'react-router-dom';
+import { ADMIN_ROUTE } from '../../../constant/RoutesConstant';
 
 function ProductList() {
 
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.products);
+    const navigate = useNavigate();
+    const products = useSelector((state) => state.products.list);
 
     return (
         <div className='table-responsive bg-white p-3 rounded shadow'>
@@ -56,7 +59,7 @@ function ProductList() {
 
                                 <td className='action'>
                                     <div className='btn-group'>
-                                        <button type='button' className='btn btn-sm btn-primary' disabled={product.isDeleted}>
+                                        <button type='button' className='btn btn-sm btn-primary' onClick={() => navigate(`${ADMIN_ROUTE.PRODUCT_UPDATE}/${product.id}`)} disabled={product.isDeleted || product.isVisible}>
                                             <EditIcon fontSize='small' />
                                         </button>
 

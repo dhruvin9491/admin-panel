@@ -15,7 +15,6 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import EditNoteIcon from "@mui/icons-material/EditNote";
 
 function Sidebar() {
     const navigate = useNavigate();
@@ -109,14 +108,6 @@ function Sidebar() {
                             >
                                 <InventoryIcon fontSize="small" />
                                 <span>Product List</span>
-                            </NavLink>
-
-                            <NavLink
-                                to={ADMIN_ROUTE.PRODUCT_UPDATE}
-                                className="nav-link d-flex align-items-center gap-3 text-white sidebar-sublink"
-                            >
-                                <EditNoteIcon fontSize="small" />
-                                <span>Update Product</span>
                             </NavLink>
                         </div>
                     )}
