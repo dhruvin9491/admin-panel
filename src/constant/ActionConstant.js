@@ -1,4 +1,5 @@
 export const PRODUCTS_ACTION = {
+    FATCH_PRODUCT: "fatch_product",
     ADD_PRODUCT: "add_product",
     UPDATE_PRODUCT: "update_product",
 

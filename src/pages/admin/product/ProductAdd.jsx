@@ -29,7 +29,6 @@ function ProductAdd() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(product);
 
         let imageURL = null;
 

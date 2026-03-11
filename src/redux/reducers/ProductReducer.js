@@ -1,12 +1,11 @@
-import { toast } from "react-toastify";
 import { PRODUCTS_ACTION } from "../../constant/ActionConstant";
-import { STORAGE_KEYS } from "../../constant/StorageConstant";
 
 const initState = {
-    products: JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || []
+    products: []
 }
 
 export const productReducer = (state = initState, action) => {
+    
     switch (action.type) {
         case PRODUCTS_ACTION.ADD_PRODUCT:
             return {
