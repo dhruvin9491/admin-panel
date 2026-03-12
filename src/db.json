@@ -1,3 +1,41 @@
 {
-    "products" : []
+  "products": [
+    {
+      "id": "d4215c2e-dfd1-49a0-ad38-d2d133af020f",
+      "name": "iphone",
+      "price": "97.14",
+      "category": "mobile",
+      "description": "test",
+      "image": null,
+      "updatedAt": "3/12/2026, 2:48:53 PM",
+      "isDeleted": false,
+      "isVisible": false,
+      "createdAt": "3/12/2026, 2:42:05 PM"
+    },
+    {
+      "id": "b985acfd-c8f8-45cf-82bb-ebb01188f9a2",
+      "name": "",
+      "price": "",
+      "category": "",
+      "description": "",
+      "image": null,
+      "updatedAt": "3/12/2026, 2:48:53 PM",
+      "isDeleted": false,
+      "isVisible": false,
+      "createdAt": "3/12/2026, 2:43:12 PM"
+    },
+    {
+      "id": "f9eada22-7c7a-4f47-92f3-b44f8a17769a",
+      "name": "",
+      "price": "",
+      "category": "",
+      "description": "",
+      "image": null,
+      "createdAt": "3/12/2026, 2:48:35 PM",
+      "updatedAt": "3/12/2026, 2:48:42 PM",
+      "isDeleted": false,
+      "isVisible": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

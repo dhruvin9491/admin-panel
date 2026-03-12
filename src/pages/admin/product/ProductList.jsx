@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RestoreIcon from '@mui/icons-material/Restore';
-import { productDelete, productHide, productRecover, productShow } from '../../../redux/actions/ProductActions';
+import { productDelete, productHide, productRecover, productsGet, productShow } from '../../../redux/actions/ProductActions';
 import { useNavigate } from 'react-router-dom';
 import { ADMIN_ROUTE } from '../../../constant/RoutesConstant';
 
@@ -14,6 +14,10 @@ function ProductList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const products = useSelector((state) => state.products.list);
+
+    useEffect(() => {
+        dispatch(productsGet());
+    }, []);
 
     return (
         <div className='table-responsive bg-white p-3 rounded shadow'>

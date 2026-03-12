@@ -1,9 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { productsGet } from '../../redux/actions/ProductActions';
 
 function Products() {
 
+    const dispatch = useDispatch();
     const products = useSelector((state => state.products.list));
+
+    useEffect(() => {
+        dispatch(productsGet());
+    }, []);
 
     return (
         <main>
@@ -15,7 +21,7 @@ function Products() {
                             <div className='col-md-4 col-lg-3' key={product.id}>
                                 <div className='card h-100 shadow-sm'>
                                     {product.image && (
-                                        <img src={product.image} alt={product.name} className='card-img-top' style={{ height: 180, objectFit: 'contain' }}/>
+                                        <img src={product.image} alt={product.name} className='card-img-top' style={{ height: 180, objectFit: 'contain' }} />
                                     )}
                                     <div className='card-body text-start'>
                                         <h5 className='card-title'>{product.name}</h5>

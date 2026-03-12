@@ -11,11 +11,8 @@ function ProductForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
-
     const isEdit = Boolean(id);
-
     const products = useSelector((state) => state.products.list);
-
     const [product, setProduct] = useState({
         name: "",
         price: "",
@@ -24,23 +21,16 @@ function ProductForm() {
         image: null
     });
 
-    // Load product for edit
     useEffect(() => {
-
         if (isEdit) {
             const existingProduct = products.find((p) => p.id === id);
-
-            if (existingProduct) {
-                setProduct(existingProduct);
-            }
+            if (existingProduct) setProduct(existingProduct);
         }
-
     }, [id, products, isEdit]);
 
     const handleChange = (e) => {
 
         const { name, value, files } = e.target;
-
         if (name === "image") {
             setProduct({ ...product, image: files[0] });
         } else {
@@ -55,27 +45,12 @@ function ProductForm() {
 
         let imageURL = product.image;
 
-        if (product.image && typeof product.image !== "string") {
-            imageURL = await uploadImage(product.image);
-        }
-
-        const payload = {
-            ...product,
-            image: imageURL,
-            updatedAt: new Date().toLocaleString()
-        };
+        if (product.image && typeof product.image !== "string") imageURL = await uploadImage(product.image);
 
         if (isEdit) {
-            dispatch(productUpdate(payload, id));
-
+            dispatch(productUpdate({ ...product, image: imageURL }, id));
         } else {
-            dispatch(productAdd({
-                ...payload,
-                id: generateUniqId(),
-                isDeleted: false,
-                isVisible: false,
-                createdAt: new Date().toLocaleString()
-            }));
+            dispatch(productAdd({ ...product, image: imageURL, id: generateUniqId() }));
         }
 
         navigate(ADMIN_ROUTE.PRODUCT_LIST);
@@ -125,7 +100,7 @@ function ProductForm() {
                                     <label className="form-label">Product Image</label>
                                     {typeof product.image === "string" && (
                                         <div className="mb-2">
-                                            <img src={product.image} alt="product" style={{ width: 80 }}/>
+                                            <img src={product.image} alt="product" style={{ width: 80 }} />
                                         </div>
                                     )}
                                     <input type="file" name="image" className="form-control"

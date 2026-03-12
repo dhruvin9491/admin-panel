@@ -1,5 +1,5 @@
 export const PRODUCTS_ACTION = {
-    FATCH_PRODUCT: "fatch_product",
+    FETCH_PRODUCT: "fetch_product",
     ADD_PRODUCT: "add_product",
     UPDATE_PRODUCT: "update_product",
 
