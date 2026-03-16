@@ -8,7 +8,7 @@ function PublicRoute() {
     const isLoggedIn = checkLogin();
     const userRole = getLoggedInUserRole();
 
-    // if (isLoggedIn) return <Navigate to={userRole === ROLES.ADMIN ? ADMIN_ROUTE.DASHBOARD : USER_ROUTE.HOME} replace />;
+    if (isLoggedIn) return <Navigate to={userRole === ROLES.ADMIN ? ADMIN_ROUTE.DASHBOARD : USER_ROUTE.HOME} replace />;
 
     return <Outlet />;
 }

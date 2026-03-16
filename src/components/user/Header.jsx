@@ -1,10 +1,9 @@
 import React from 'react';
 import { getLoggedInUser } from '../../helper/AuthHelper';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { USER_ROUTE } from '../../constant/RoutesConstant';
 
 function Header() {
-    const navigate = useNavigate();
     const { name = 'Guest', profileImage = null } = getLoggedInUser() || {};
 
     return (

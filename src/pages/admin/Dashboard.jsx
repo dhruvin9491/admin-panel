@@ -1,10 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { authLogout } from '../../helper/AuthHelper';
-import { AUTH_ROUTE } from '../../constant/RoutesConstant';
+import React from 'react'
 
-function Dashboard(props) {
-    const navigate = useNavigate();
+function Dashboard() {
     return (
         <div className='py-5 text-center text-dark'>
             <div className='bg-white p-4 rounded shadow'>

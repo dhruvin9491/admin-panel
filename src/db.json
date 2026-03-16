@@ -1,38 +1,14 @@
 {
   "products": [
     {
-      "id": "d4215c2e-dfd1-49a0-ad38-d2d133af020f",
-      "name": "iphone",
-      "price": "97.14",
+      "id": "d488f0c2-21ad-44fe-9c74-dd3a6b8cd909",
+      "name": "iphone 17 pro max",
+      "price": "90000",
       "category": "mobile",
-      "description": "test",
-      "image": null,
-      "updatedAt": "3/12/2026, 2:48:53 PM",
-      "isDeleted": false,
-      "isVisible": false,
-      "createdAt": "3/12/2026, 2:42:05 PM"
-    },
-    {
-      "id": "b985acfd-c8f8-45cf-82bb-ebb01188f9a2",
-      "name": "",
-      "price": "",
-      "category": "",
-      "description": "",
-      "image": null,
-      "updatedAt": "3/12/2026, 2:48:53 PM",
-      "isDeleted": false,
-      "isVisible": false,
-      "createdAt": "3/12/2026, 2:43:12 PM"
-    },
-    {
-      "id": "f9eada22-7c7a-4f47-92f3-b44f8a17769a",
-      "name": "",
-      "price": "",
-      "category": "",
-      "description": "",
-      "image": null,
-      "createdAt": "3/12/2026, 2:48:35 PM",
-      "updatedAt": "3/12/2026, 2:48:42 PM",
+      "description": "This is the best mobile",
+      "image": "https://res.cloudinary.com/deiofdjcn/image/upload/v1773654070/products/hs35db0y86aicvc8cpbi.jpg",
+      "createdAt": "3/16/2026, 3:11:10 PM",
+      "updatedAt": "3/16/2026, 3:12:51 PM",
       "isDeleted": false,
       "isVisible": false
     }
