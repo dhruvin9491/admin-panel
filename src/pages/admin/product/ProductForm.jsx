@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ADMIN_ROUTE } from "../../../constant/RoutesConstant";
-import { productAdd, productUpdate } from "../../../redux/actions/ProductActions";
+import { productAdd, productUpdate } from "../../../redux/slices/productSlice";
 import { generateUniqId } from "../../../helper/DataGeneratHelper";
 import { uploadImage } from "../../../helper/UploadImage";
 
@@ -48,7 +48,7 @@ function ProductForm() {
         if (product.image && typeof product.image !== "string") imageURL = await uploadImage(product.image);
 
         if (isEdit) {
-            dispatch(productUpdate({ ...product, image: imageURL }, id));
+            dispatch(productUpdate({ product: { ...product, image: imageURL }, id }));
         } else {
             dispatch(productAdd({ ...product, image: imageURL, id: generateUniqId() }));
         }

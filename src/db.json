@@ -3,12 +3,12 @@
     {
       "id": "d488f0c2-21ad-44fe-9c74-dd3a6b8cd909",
       "name": "iphone 17 pro max",
-      "price": "90000",
+      "price": "9",
       "category": "mobile",
       "description": "This is the best mobile",
       "image": "https://res.cloudinary.com/deiofdjcn/image/upload/v1773654070/products/hs35db0y86aicvc8cpbi.jpg",
       "createdAt": "3/16/2026, 3:11:10 PM",
-      "updatedAt": "3/16/2026, 3:12:51 PM",
+      "updatedAt": "3/18/2026, 3:11:43 PM",
       "isDeleted": false,
       "isVisible": false
     }

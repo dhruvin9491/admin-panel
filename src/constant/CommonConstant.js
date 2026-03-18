@@ -12,3 +12,9 @@ export const DEFAULT_ADMIN = {
     PROFILE_IMAGE: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthOjSXUVkO2suuT50NGMszsdvSkfzSP8b9Q&s",
     ROLE: ROLES.ADMIN
 }
+
+export const PROMISE_PHASE = {
+    PENDING: "pending",
+    FULFILLED: "fulfilled",
+    REJECTED: "rejected"
+};

@@ -1,6 +1,11 @@
-import { applyMiddleware, createStore } from "redux";
-import { rootReducer } from "./reducers/RootReducer";
-import { thunk } from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import { SLICE_NAME } from "../constant/ActionConstant";
+import productSlice from "./slices/productSlice";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = configureStore({
+    reducer : {
+        [SLICE_NAME.PRODUCTS] : productSlice.reducer,
+    }
+});
+
 export default store;
