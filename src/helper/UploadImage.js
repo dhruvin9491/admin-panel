@@ -4,10 +4,10 @@ export const uploadImage = async (file) => {
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("upload_preset", "foodyassets");
-    formData.append("folder", "products");
+    formData.append("upload_preset", "???");
+    formData.append("folder", "???");
 
-    const response = await axios.post("https://api.cloudinary.com/v1_1/deiofdjcn/image/upload", formData);
+    const response = await axios.post("https://api.cloudinary.com/v1_1/???/image/upload", formData);
 
     return response.data.secure_url;
 }
