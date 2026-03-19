@@ -32,6 +32,7 @@
     "yup": "^1.7.1"
   },
   "scripts": {
+    "build": "react-scripts build",
     "start": "set NODE_OPTIONS=--no-deprecation && react-scripts start",
     "server": "json-server --watch ./src/db.json --port 5000",
     "dev": "concurrently --raw \"npm start\" \"npm run server\""
