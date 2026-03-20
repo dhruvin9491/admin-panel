@@ -17,7 +17,6 @@ function ProductList() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const { list, loading, error } = useSelector((state) => state.products);
 
     useEffect(() => {

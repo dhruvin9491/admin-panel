@@ -16,9 +16,9 @@
     "axois": "^0.0.1-security",
     "bootstrap": "^5.3.8",
     "concurrently": "^9.2.1",
+    "firebase": "^12.10.0",
     "formik": "^2.4.9",
     "jquery": "^4.0.0",
-    "json-server": "^1.0.0-beta.12",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
@@ -33,9 +33,7 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "set NODE_OPTIONS=--no-deprecation && react-scripts start",
-    "server": "json-server --watch ./src/db.json --port 5000",
-    "dev": "concurrently --raw \"npm start\" \"npm run server\""
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [

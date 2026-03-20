@@ -50,7 +50,7 @@ function ProductForm() {
         if (isEdit) {
             dispatch(productUpdate({ product: { ...product, image: imageURL }, id }));
         } else {
-            dispatch(productAdd({ ...product, image: imageURL, id: generateUniqId() }));
+            dispatch(productAdd({ ...product, image: imageURL}));
         }
 
         navigate(ADMIN_ROUTE.PRODUCT_LIST);

@@ -1,66 +1,87 @@
-import axios from "axios";
-import { PRODUCT_API } from "../../constant/ApiContant";
-import { PRODUCTS_ACTION, SLICE_NAME } from "../../constant/ActionConstant";
-import { addData, getData, updateData } from "../../helper/sliceHelper";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { PRODUCTS_ACTION, SLICE_NAME } from "../../constant/ActionConstant";
 import { PROMISE_PHASE } from "../../constant/CommonConstant";
+import { addData, getData } from "../../helper/sliceHelper";
 
 export const productsGet = createAsyncThunk(PRODUCTS_ACTION.FETCH, async () => {
-    const res = await axios.get(PRODUCT_API);
-    return res.data;
+    const snapDocRef = await getDocs(collection(db, SLICE_NAME.PRODUCTS));
+    return snapDocRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 });
 
 export const productAdd = createAsyncThunk(PRODUCTS_ACTION.ADD, async (product) => {
-    const res = await axios.post(PRODUCT_API, {
+    const payload = {
         ...product,
         createdAt: new Date().toLocaleString(),
         updatedAt: new Date().toLocaleString(),
         isDeleted: false,
         isVisible: false
-    });
-    return res.data;
+    };
+    const docRef = await addDoc(collection(db, SLICE_NAME.PRODUCTS), payload);
+    return { id: docRef.id, ...payload };
 });
 
 export const productUpdate = createAsyncThunk(PRODUCTS_ACTION.UPDATE, async ({ product, id }) => {
-    const res = await axios.patch(`${PRODUCT_API}/${id}`, {
+    const docRef = doc(db, SLICE_NAME.PRODUCTS, id);
+    const updatedData = {
         ...product,
         updatedAt: new Date().toLocaleString()
-    });
-    return res.data;
+    };
+    await updateDoc(docRef, updatedData);
+    return { id, ...updatedData };
 });
 
 export const productDelete = createAsyncThunk(PRODUCTS_ACTION.DELETE, async (id) => {
-    const res = await axios.patch(`${PRODUCT_API}/${id}`, {
+    const docRef = doc(db, SLICE_NAME.PRODUCTS, id);
+    const updatedData = {
         isDeleted: true,
         isVisible: false,
         updatedAt: new Date().toLocaleString()
-    });
-    return res.data;
+    };
+    await updateDoc(docRef, updatedData);
+    return { id, ...updatedData };
 });
 
 export const productRecover = createAsyncThunk(PRODUCTS_ACTION.RECOVER, async (id) => {
-    const res = await axios.patch(`${PRODUCT_API}/${id}`, {
+    const docRef = doc(db, SLICE_NAME.PRODUCTS, id);
+    const updatedData = {
         isDeleted: false,
         updatedAt: new Date().toLocaleString()
-    });
-    return res.data;
+    };
+    await updateDoc(docRef, updatedData);
+    return { id, ...updatedData };
 });
 
 export const productHide = createAsyncThunk(PRODUCTS_ACTION.HIDE, async (id) => {
-    const res = await axios.patch(`${PRODUCT_API}/${id}`, {
+    const docRef = doc(db, SLICE_NAME.PRODUCTS, id);
+    const updatedData = {
         isVisible: false,
         updatedAt: new Date().toLocaleString()
-    });
-    return res.data;
+    };
+    await updateDoc(docRef, updatedData);
+    return { id, ...updatedData };
 });
 
 export const productShow = createAsyncThunk(PRODUCTS_ACTION.SHOW, async (id) => {
-    const res = await axios.patch(`${PRODUCT_API}/${id}`, {
+    const docRef = doc(db, SLICE_NAME.PRODUCTS, id);
+    const updatedData = {
         isVisible: true,
         updatedAt: new Date().toLocaleString()
-    });
-    return res.data;
+    };
+    await updateDoc(docRef, updatedData);
+    return { id, ...updatedData };
 });
+
+const mergeUpdate = (state, action) => {
+    const index = state.list.findIndex((item) => item.id === action.payload.id);
+    if (index !== -1) {
+        state.list[index] = {
+            ...state.list[index],
+            ...action.payload
+        };
+    }
+};
 
 const productSlice = createSlice({
     name: SLICE_NAME.PRODUCTS,
@@ -74,12 +95,11 @@ const productSlice = createSlice({
         builder
             .addCase(productsGet.fulfilled, getData)
             .addCase(productAdd.fulfilled, addData)
-            .addCase(productUpdate.fulfilled, updateData)
-            .addCase(productDelete.fulfilled, updateData)
-            .addCase(productRecover.fulfilled, updateData)
-            .addCase(productHide.fulfilled, updateData)
-            .addCase(productShow.fulfilled, updateData)
-
+            .addCase(productUpdate.fulfilled, mergeUpdate)
+            .addCase(productDelete.fulfilled, mergeUpdate)
+            .addCase(productRecover.fulfilled, mergeUpdate)
+            .addCase(productHide.fulfilled, mergeUpdate)
+            .addCase(productShow.fulfilled, mergeUpdate)
             .addMatcher(
                 (action) =>
                     action.type.startsWith(SLICE_NAME.PRODUCTS) &&
@@ -105,8 +125,8 @@ const productSlice = createSlice({
                 (state) => {
                     state.loading = false;
                 }
-            )
+            );
     }
-})
+});
 
 export default productSlice;
